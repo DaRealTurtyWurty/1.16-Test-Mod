@@ -6,6 +6,8 @@ import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -16,7 +18,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-@Mod.EventBusSubscriber(modid = ExampleMod.MOD_ID, bus = Bus.MOD)
+@Mod.EventBusSubscriber(modid = ExampleMod.MOD_ID, bus = Bus.FORGE)
 public class BiomeInit {
 	public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, ExampleMod.MOD_ID);
 
@@ -24,10 +26,11 @@ public class BiomeInit {
 	private static final RegistryKey<Biome> RUBY_HILLS_KEY = RegistryKey.getOrCreateKey(Registry.BIOME_KEY,
 			new ResourceLocation(ExampleMod.MOD_ID, "ruby_hills"));
 
-	@SubscribeEvent(priority = EventPriority.HIGHEST)
+	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void biomeLoading(BiomeLoadingEvent event) {
-		if (event.getName() == RUBY_HILLS.get().getRegistryName()) {
+		if (event.getName().equals(RUBY_HILLS.get().getRegistryName())) {
 			BiomeManager.addBiome(BiomeManager.BiomeType.WARM, new BiomeManager.BiomeEntry(RUBY_HILLS_KEY, 6));
+			BiomeDictionary.addTypes(RUBY_HILLS_KEY, Type.HILLS, Type.MOUNTAIN);
 		}
 	}
 }
