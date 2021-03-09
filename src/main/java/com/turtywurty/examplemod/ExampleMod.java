@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import com.turtywurty.examplemod.core.init.BlockInit;
 import com.turtywurty.examplemod.core.init.EntityTypeInit;
 import com.turtywurty.examplemod.core.init.ItemInit;
+import com.turtywurty.examplemod.core.init.SurfaceBuilderInit;
 import com.turtywurty.examplemod.world.BiomeInit;
 
 import net.minecraft.block.Blocks;
@@ -28,6 +29,7 @@ public class ExampleMod {
 		ItemInit.ITEMS.register(bus);
 		BlockInit.BLOCKS.register(bus);
 		EntityTypeInit.ENTITY_TYPES.register(bus);
+		SurfaceBuilderInit.SURFACE_BUILDERS.register(bus);
 		BiomeInit.BIOMES.register(bus);
 
 		MinecraftForge.EVENT_BUS.register(this);
