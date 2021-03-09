@@ -1,5 +1,7 @@
 package com.turtywurty.examplemod.world;
 
+import com.turtywurty.examplemod.core.init.SurfaceBuilderInit;
+
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.math.MathHelper;
@@ -11,34 +13,23 @@ import net.minecraft.world.biome.BiomeAmbience;
 import net.minecraft.world.biome.BiomeGenerationSettings;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.biome.MobSpawnInfo;
-import net.minecraft.world.gen.feature.structure.StructureFeatures;
 import net.minecraft.world.gen.surfacebuilders.ISurfaceBuilderConfig;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 
 public class BiomeMaker {
 
-	public static Biome makeRubyHills() {
-		BiomeGenerationSettings.Builder generationSettings = genSettings(SurfaceBuilder.DEFAULT,
+	public static Biome makeTestBiome() {
+		BiomeGenerationSettings.Builder generationSettings = genSettings(SurfaceBuilderInit.NAKED_TEST_SURFACE_BUILDER,
 				SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG);
 
 		WorldGenRegistries.init();
-
-		generationSettings.withStructure(StructureFeatures.PILLAGER_OUTPOST);
-		generationSettings.withStructure(StructureFeatures.VILLAGE_PLAINS);
-		generationSettings.withStructure(StructureFeatures.RUINED_PORTAL);
 		DefaultBiomeFeatures.withCavesAndCanyons(generationSettings);
-		DefaultBiomeFeatures.withStrongholdAndMineshaft(generationSettings);
-		DefaultBiomeFeatures.withMonsterRoom(generationSettings);
-		DefaultBiomeFeatures.withCommonOverworldBlocks(generationSettings);
-		DefaultBiomeFeatures.withOverworldOres(generationSettings);
-		DefaultBiomeFeatures.withDisks(generationSettings);
-		DefaultBiomeFeatures.withMushroomBiomeVegetation(generationSettings);
 		DefaultBiomeFeatures.withLavaAndWaterSprings(generationSettings);
 		DefaultBiomeFeatures.withLavaAndWaterLakes(generationSettings);
 
 		MobSpawnInfo.Builder spawnSettings = new MobSpawnInfo.Builder();
 		// spawnSettings.withSpawner(EntityClassification.CREATURE, new
-		// MobSpawnInfo.Spawners(EntityTypeRegistry.RUBY_SHEEP, 12, 2, 3));
+		// MobSpawnInfo.Spawners(EntityTypeInit.TEST_ENTITY.get(), 12, 2, 3));
 		spawnSettings.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EntityType.MULE, 5, 1, 3));
 		DefaultBiomeFeatures.withPassiveMobs(spawnSettings);
 		DefaultBiomeFeatures.withBatsAndHostiles(spawnSettings);
@@ -57,8 +48,8 @@ public class BiomeMaker {
 				.withGenerationSettings(genSettings.build()).withMobSpawnSettings(spawnSettings).build();
 	}
 
-	private static <C extends ISurfaceBuilderConfig> BiomeGenerationSettings.Builder genSettings(SurfaceBuilder<C> surfaceBuilder,
-			C config) {
+	private static <C extends ISurfaceBuilderConfig> BiomeGenerationSettings.Builder genSettings(
+			SurfaceBuilder<C> surfaceBuilder, C config) {
 		return new BiomeGenerationSettings.Builder().withSurfaceBuilder(surfaceBuilder.func_242929_a(config));
 	}
 

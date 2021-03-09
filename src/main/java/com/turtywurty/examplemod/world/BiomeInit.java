@@ -22,15 +22,15 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class BiomeInit {
 	public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, ExampleMod.MOD_ID);
 
-	private static final RegistryObject<Biome> RUBY_HILLS = BIOMES.register("ruby_hills", BiomeMaker::makeRubyHills);
-	private static final RegistryKey<Biome> RUBY_HILLS_KEY = RegistryKey.getOrCreateKey(Registry.BIOME_KEY,
-			new ResourceLocation(ExampleMod.MOD_ID, "ruby_hills"));
+	private static final RegistryObject<Biome> TEST_BIOME = BIOMES.register("test", BiomeMaker::makeTestBiome);
+	private static final RegistryKey<Biome> TEST_BIOME_KEY = RegistryKey.getOrCreateKey(Registry.BIOME_KEY,
+			new ResourceLocation(ExampleMod.MOD_ID, "test"));
 
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void biomeLoading(BiomeLoadingEvent event) {
-		if (event.getName().equals(RUBY_HILLS.get().getRegistryName())) {
-			BiomeManager.addBiome(BiomeManager.BiomeType.WARM, new BiomeManager.BiomeEntry(RUBY_HILLS_KEY, 6));
-			BiomeDictionary.addTypes(RUBY_HILLS_KEY, Type.HILLS, Type.MOUNTAIN);
+		if (event.getName().equals(TEST_BIOME.get().getRegistryName())) {
+			BiomeManager.addBiome(BiomeManager.BiomeType.WARM, new BiomeManager.BiomeEntry(TEST_BIOME_KEY, 6));
+			BiomeDictionary.addTypes(TEST_BIOME_KEY, Type.HILLS, Type.MOUNTAIN);
 		}
 	}
 }
