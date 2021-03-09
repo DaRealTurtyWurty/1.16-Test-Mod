@@ -15,8 +15,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.Tags.Items;
 
 public enum ArmorMaterials implements IArmorMaterial {
-	EXAMPLE(ExampleMod.MOD_ID + ":example", 5, new int[] { 4, 7, 9, 4 }, 30, SoundEvents.ENTITY_PLAYER_LEVELUP, 0.0f,
-			0.2f, () -> Ingredient.fromTag(Items.BONES));
+	EXAMPLE(ExampleMod.MOD_ID + ":example", 5, new int[] { 4, 7, 9, 4 }, 30, SoundEvents.ENTITY_PLAYER_LEVELUP, 0.0f, 0.2f,
+			() -> Ingredient.fromTag(Items.BONES));
 
 	private static final int[] MAX_DAMAGE_ARRAY = new int[] { 13, 15, 16, 11 };
 	private final String name;
@@ -31,22 +31,24 @@ public enum ArmorMaterials implements IArmorMaterial {
 	/**
 	 * Create the armor material.
 	 * 
-	 * @param name                       - the name of the armor material. Should be
+	 * @param name                       - The name of the armor material. Should be
 	 *                                   in the format <code>"modid:name"</code>
-	 * @param maxDamageFactor            - the multiplier for the durability of the
+	 * @param maxDamageFactor            - The multiplier for the durability of the
 	 *                                   armor pieces.
-	 * @param damageReductionAmountArray - the array from toe to head that each
+	 * @param damageReductionAmountArray - The array from toe to head that each
 	 *                                   armor piece will use to reduct damage.
-	 * @param enchantability             - how enchantable this armor is; higher the
+	 * @param enchantability             - How enchantable this armor is; higher the
 	 *                                   number, the more enchantable.
-	 * @param soundEvent                 - the sound event that will play when this
+	 * @param soundEvent                 - The sound event that will play when this
 	 *                                   armor set is equipped.
-	 * @param toughness                  - the amount of toughness this armor set
+	 * @param toughness                  - The amount of toughness this armor set
 	 *                                   will use. Information on toughness can be
 	 *                                   found <a
 	 *                                   href"https://minecraft.gamepedia.com/Armor#Armor_toughness">here</a>
-	 * @param knockbackResistance
-	 * @param repairMaterial
+	 * @param knockbackResistance        - The amount of knockback resistance this
+	 *                                   armor material applies.
+	 * @param repairMaterial             - An ingredient for the repair material
+	 *                                   that is used for this armor material.
 	 */
 	private ArmorMaterials(String name, int maxDamageFactor, int[] damageReductionAmountArray, int enchantability,
 			SoundEvent soundEvent, float toughness, float knockbackResistance, Supplier<Ingredient> repairMaterial) {
