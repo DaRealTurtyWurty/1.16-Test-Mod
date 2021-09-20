@@ -4,6 +4,8 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.turtywurty.examplemod.ExampleMod;
+import com.turtywurty.examplemod.client.screen.RadioScreen;
+import com.turtywurty.examplemod.common.tiles.RadioTileEntity;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -29,7 +31,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @Mod.EventBusSubscriber(modid = ExampleMod.MOD_ID, bus = Bus.MOD, value = Dist.CLIENT)
-public class ClientEventBus {
+public class ClientStuff {
 
 	private static final ResourceLocation DIM_RENDER_INFO = new ResourceLocation(ExampleMod.MOD_ID, "example_dim");
 	private static final ResourceLocation SUN_TEXTURES = new ResourceLocation("textures/item/redstone.png");
@@ -227,5 +229,9 @@ public class ClientEventBus {
 						};
 					}
 				});
+	}
+	
+	public static void displayRadioScreen(RadioTileEntity te) {
+		Minecraft.getInstance().displayGuiScreen(new RadioScreen(te));
 	}
 }

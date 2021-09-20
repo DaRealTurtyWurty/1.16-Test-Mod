@@ -34,8 +34,8 @@ public class ExampleArmor extends ArmorItem {
 
 		Stream<Item> armorStream = StreamSupport.stream(player.getArmorInventoryList().spliterator(), false)
 				.map(ItemStack::getItem);
-		boolean hasAllArmor = armorStream.allMatch(armor -> armor instanceof ExampleArmor);
-		boolean hasAnyArmor = armorStream.anyMatch(armor -> armor instanceof ExampleArmor);
+		boolean hasAllArmor = armorStream.allMatch(ExampleArmor.class::isInstance);
+		boolean hasAnyArmor = armorStream.anyMatch(ExampleArmor.class::isInstance);
 
 		if (hasAllArmor) {
 			// do something

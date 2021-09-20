@@ -5,16 +5,19 @@ import com.turtywurty.examplemod.common.items.ExampleArmor;
 import com.turtywurty.examplemod.core.util.ArmorMaterials;
 
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class ItemInit {
+public final class ItemInit {
 
-	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS,
-			ExampleMod.MOD_ID);
+	private ItemInit() {
+	}
+
+	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ExampleMod.MOD_ID);
 
 	public static final RegistryObject<Item> EXAMPLE_ITEM = ITEMS.register("example_item",
 			() -> new Item(new Item.Properties().group(ItemGroup.MISC)));
@@ -34,4 +37,7 @@ public class ItemInit {
 	public static final RegistryObject<ExampleArmor> EXAMPLE_BOOTS = ITEMS.register("example_boots",
 			() -> new ExampleArmor(ArmorMaterials.EXAMPLE, EquipmentSlotType.HEAD,
 					new Item.Properties().group(ItemGroup.COMBAT)));
+
+	public static final RegistryObject<BlockItem> RADIO = ITEMS.register("radio",
+			() -> new BlockItem(BlockInit.RADIO.get(), new Item.Properties().group(ItemGroup.MISC)));
 }
